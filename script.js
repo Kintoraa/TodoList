@@ -1,35 +1,24 @@
 const form = document.querySelector("form");
 
-const storageList = () => {
-  localStorage.todoList = list.innerHTML;
-};
-
-const addList = () => {
-  if (localStorage.todoList) {
-    list.innerHTML = localStorage.todoList;
-  } else {
-    list.innerHTML = "<li>Cliquez sur un todo pour le supprimer </li>";
-  }
-};
-
 window.addEventListener("load", () => {
-  addList();
+  list.innerHTML = localStorage.todoList;
 });
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  list.innerHTML += `<li>${item.value}</li>`;
-
-  item.value = "";
-  storageList();
+  const value = text.value;
+  console.log(value);
+  list.innerHTML += "<li> " + value + " </li>";
+  text.value = "";
+  localStorage.todoList = list.innerHTML;
 });
 
 list.addEventListener("click", (e) => {
   if (e.target.classList.contains("checked")) {
     e.target.remove();
+    localStorage.todoList = list.innerHTML;
   } else {
     e.target.classList.add("checked");
+    localStorage.todoList = list.innerHTML;
   }
-
-  storageList();
 });
